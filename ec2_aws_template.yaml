@@ -380,16 +380,11 @@ Resources:
           - !Ref InstanceType
           - Arch
       UserData:
-       Fn::Base64:
-         !Sub |
-           #!/bin/bash
-
-           yum update -y
-
-           yum install -y httpd
-
-           systemctl start httpd
-           systemctl enable httpd
+        Fn::Base64: !Sub |
+            #!/bin/bash
+            yum install httpd -y
+            service httpd start
+            echo "<html><body><h1>Hello from Region ${AWS::Region}<h1></body></html>" > /var/www/html/index.html
 
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
