@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description:  This template deploys a VPC, with a pair of public and private subnets spread
+Description:  This template deploys a VPC in either us-east1 or us-west-2, with a pair of public and private subnets spread
   across two Availability Zones. It deploys an internet gateway, with a default
-  route on the public subnets. 
+  route on the public subnets, a Linux t2.micro Instance with Security Group with open HTTP access. 
     
 Mappings:
   RegionMap:
@@ -109,7 +109,7 @@ Resources:
   WebServerSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
-      GroupDescription: Enable SSH access and HTTP from 0.0.0.0/0
+      GroupDescription: Enable HTTP from 0.0.0.0/0
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: '80'
